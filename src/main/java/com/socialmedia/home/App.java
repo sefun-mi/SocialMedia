@@ -19,8 +19,6 @@ public class App {
         System.out.println("TO SIGNUP PLEASE SELECT: "+OPTION_SIGNUP);
         System.out.println("TO LOGIN PLEASE SELECT: "+OPTION_LOGIN);
 
-        Profile profile = new Profile();
-        profile.setEmail("se@mail.com");
 
 
     }
