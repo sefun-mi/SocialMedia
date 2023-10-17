@@ -19,8 +19,6 @@ public class App {
         System.out.println("TO SIGNUP PLEASE SELECT: "+OPTION_SIGNUP);
         System.out.println("TO LOGIN PLEASE SELECT: "+OPTION_LOGIN);
 
-
-
     }
 
     public void query(Object obj){
