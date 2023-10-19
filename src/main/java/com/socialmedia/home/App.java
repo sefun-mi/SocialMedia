@@ -1,11 +1,13 @@
 package com.socialmedia.home;
 
+import com.socialmedia.DAO.ProfileDAO;
 import com.socialmedia.entities.Profile;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class App {
 
@@ -34,6 +36,18 @@ public class App {
     }
 
     static void profileMenu(){
+        ProfileDAO pdao = new ProfileDAO();
+        Scanner sc = new Scanner(System.in);
+        int input = sc.nextInt();
+        switch (input){
+            case 1:
+                System.out.println("Enter account email");
+                String email = sc.nextLine();
+                System.out.println("Enter account password");
+                String password = sc.nextLine();
+                pdao.CreateProfile(new Profile(email,password));
+
+        }
 
     }
 

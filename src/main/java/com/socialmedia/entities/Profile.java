@@ -10,14 +10,19 @@ public class Profile {
 
     private String userId;
     private String userName;
-
+    private String password;
     @Id
     private String email;
 
 
     public Profile(){
         this.userId = "0001";
-        this.userName = "Se";
+    }
+
+    public Profile(String email, String password){
+        this.email = email;
+        this.password = password;
+        this.userId = "0002";
     }
 
     public String getUserId() {
@@ -42,5 +47,13 @@ public class Profile {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
