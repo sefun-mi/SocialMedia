@@ -56,7 +56,7 @@ public class ProfileDAO {
         EntityManager em = util.getEM();
         var tx = em.getTransaction();
         tx.begin();
-        List profiles = em.createQuery("SELECT * from m WHERE m.email = "+email).getResultList();
+        List profiles = em.createQuery("SELECT * from PROFILE WHERE PROFILE.email = "+email).getResultList();
 
         if(profiles.size()>0){
             return true;
