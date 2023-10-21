@@ -39,14 +39,19 @@ public class App {
         ProfileDAO pdao = new ProfileDAO();
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
-        switch (input){
-            case 1:
-                System.out.println("Enter account email");
-                String email = sc.nextLine();
-                System.out.println("Enter account password");
-                String password = sc.nextLine();
-                pdao.CreateProfile(new Profile(email,password));
 
+        if(input==1){
+            System.out.println("Enter account email");
+            String email = sc.nextLine();
+            System.out.println("Enter account password");
+            String password = sc.nextLine();
+            pdao.CreateProfile(new Profile(email,password));
+        }else if(input==2){
+            System.out.println("Enter account email");
+            String email = sc.nextLine();
+            System.out.println("Enter account password");
+            String password = sc.nextLine();
+            pdao.logIn(email,password);
         }
 
     }
