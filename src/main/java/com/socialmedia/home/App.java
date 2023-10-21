@@ -21,6 +21,14 @@ public class App {
         System.out.println("TO SIGNUP PLEASE SELECT: "+OPTION_SIGNUP);
         System.out.println("TO LOGIN PLEASE SELECT: "+OPTION_LOGIN);
 
+        Scanner sc = new Scanner(System.in);
+        int input = sc.nextInt();
+
+        switch(input){
+            case 1:
+                profileMenu();
+        }
+
     }
 
     public void query(Object obj){
