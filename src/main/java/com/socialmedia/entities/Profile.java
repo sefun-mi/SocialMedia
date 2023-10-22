@@ -23,6 +23,7 @@ public class Profile {
         this.email = email;
         this.password = password;
         this.userId = "0002";
+        System.out.println(email+password+"check.");
     }
 
     public String getUserId() {

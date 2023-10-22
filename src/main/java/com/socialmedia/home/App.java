@@ -23,24 +23,33 @@ public class App {
 
         ProfileDAO pdao = new ProfileDAO();
         Scanner sc = new Scanner(System.in);
-        int input = sc.nextInt();
 
-        if(input==OPTION_SIGNUP){
-            System.out.println("Enter account email");
-            String email = sc.nextLine();
-            System.out.println("<----------->");
-            System.out.println("Enter account password");
-            String password = sc.nextLine();
-            System.out.println("<----------->");
-            pdao.CreateProfile(new Profile(email,password));
+        System.out.println("Enter account email");
+        String email = sc.nextLine();
+        System.out.println("<----------->");
+        System.out.println("Enter account password");
+        String password = sc.nextLine();
+        System.out.println("<----------->");
+        pdao.CreateProfile(new Profile(email,password));
 
-        }else if(input==OPTION_LOGIN){
-            System.out.println("Enter account email");
-            String email = sc.nextLine();
-            System.out.println("Enter account password");
-            String password = sc.nextLine();
-            pdao.logIn(email,password);
-        }
+//        int input = sc.nextInt();
+
+//        if(input==OPTION_SIGNUP){
+//            System.out.println("Enter account email");
+//            String email = sc.nextLine();
+//            System.out.println("<----------->");
+//            System.out.println("Enter account password");
+//            String password = sc.nextLine();
+//            System.out.println("<----------->");
+//            pdao.CreateProfile(new Profile(email,password));
+//
+//        }else if(input==OPTION_LOGIN){
+//            System.out.println("Enter account email");
+//            String email = sc.nextLine();
+//            System.out.println("Enter account password");
+//            String password = sc.nextLine();
+//            pdao.logIn(email,password);
+//        }
 
     }
 
