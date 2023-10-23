@@ -13,6 +13,11 @@ public class App {
 
     public static final int OPTION_SIGNUP = 1;
     public static final int OPTION_LOGIN = 2;
+    public static final int OPTION_VIEW_POSTS = 3;
+    public static final int OPTION_CREATE_POST = 4;
+    public static final int OPTION_SEARCH_POST = 5;
+    public static final int OPTION_SEARCH_PROFILE = 6;
+    public static final int OPTION_VIEW_PERSONAL_PROFILE = 7;
 
     public static void main(String [] args){
         System.out.println("------------------------------");
@@ -23,6 +28,7 @@ public class App {
 
         ProfileDAO pdao = new ProfileDAO();
         Scanner sc = new Scanner(System.in);
+        int input = sc.nextInt();
 
         System.out.println("Enter account email");
         String email = sc.nextLine();
@@ -30,26 +36,21 @@ public class App {
         System.out.println("Enter account password");
         String password = sc.nextLine();
         System.out.println("<----------->");
-        pdao.CreateProfile(new Profile(email,password));
 
-//        int input = sc.nextInt();
+        switch(input){
+            case 1:
+                pdao.CreateProfile(new Profile(email,password));
 
-//        if(input==OPTION_SIGNUP){
-//            System.out.println("Enter account email");
-//            String email = sc.nextLine();
-//            System.out.println("<----------->");
-//            System.out.println("Enter account password");
-//            String password = sc.nextLine();
-//            System.out.println("<----------->");
-//            pdao.CreateProfile(new Profile(email,password));
-//
-//        }else if(input==OPTION_LOGIN){
-//            System.out.println("Enter account email");
-//            String email = sc.nextLine();
-//            System.out.println("Enter account password");
-//            String password = sc.nextLine();
-//            pdao.logIn(email,password);
-//        }
+            case 2:
+                pdao.logIn(email,password);
+        }
+
+        System.out.println("WHAT OPERATION WOULD YOU LIKE TO DO NOW");
+        System.out.println("TO VIEW POSTS ENTER "+OPTION_VIEW_POSTS);
+        System.out.println("TO CREATE A POST ENTER "+OPTION_CREATE_POST);
+        System.out.println("TO SEARCH FOR POSTS ENTER "+OPTION_SEARCH_POST);
+        System.out.println("TO SEARCH FOR A PROFILE ENTER "+OPTION_SEARCH_PROFILE);
+        System.out.println("TO VIEW PERSONAL PROFILE ENTER "+OPTION_VIEW_PERSONAL_PROFILE);
 
     }
 
@@ -66,23 +67,6 @@ public class App {
     }
 
     static void profileMenu(){
-        ProfileDAO pdao = new ProfileDAO();
-        Scanner sc = new Scanner(System.in);
-        int input = sc.nextInt();
-
-        if(input==1){
-            System.out.println("Enter account email");
-            String email = sc.nextLine();
-            System.out.println("Enter account password");
-            String password = sc.nextLine();
-            pdao.CreateProfile(new Profile(email,password));
-        }else if(input==2){
-            System.out.println("Enter account email");
-            String email = sc.nextLine();
-            System.out.println("Enter account password");
-            String password = sc.nextLine();
-            pdao.logIn(email,password);
-        }
 
     }
 
