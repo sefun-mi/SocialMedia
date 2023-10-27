@@ -20,12 +20,6 @@ public class App {
     public static final int OPTION_VIEW_PERSONAL_PROFILE = 7;
 
     public static void main(String [] args){
-//        Scanner sc = new Scanner(System.in);
-//        String input = sc.nextLine();
-//        System.out.println("again");
-//        String input2 = sc.nextLine();
-//        System.out.println("againnn");
-//        String input3 = sc.nextLine();
 
         System.out.println("------------------------------");
         System.out.println("WELCOME TO THE APP!");
@@ -42,21 +36,41 @@ public class App {
         System.out.println("Enter account password");
         String password = sc.nextLine();
         System.out.println("<----------->");
-//
-//        switch(input){
-//            case 1:
-//                pdao.CreateProfile(new Profile(email,password));
-//
-//            case 2:
-//                pdao.logIn(email,password);
-//        }
-//
-//        System.out.println("WHAT OPERATION WOULD YOU LIKE TO DO NOW");
-//        System.out.println("TO VIEW POSTS ENTER "+OPTION_VIEW_POSTS);
-//        System.out.println("TO CREATE A POST ENTER "+OPTION_CREATE_POST);
-//        System.out.println("TO SEARCH FOR POSTS ENTER "+OPTION_SEARCH_POST);
-//        System.out.println("TO SEARCH FOR A PROFILE ENTER "+OPTION_SEARCH_PROFILE);
-//        System.out.println("TO VIEW PERSONAL PROFILE ENTER "+OPTION_VIEW_PERSONAL_PROFILE);
+
+        switch(input){
+            case OPTION_SIGNUP:
+                pdao.CreateProfile(new Profile(email,password));
+
+            case OPTION_LOGIN:
+                pdao.logIn(email,password);
+        }
+
+        System.out.println("WHAT OPERATION WOULD YOU LIKE TO DO NOW");
+        System.out.println("TO VIEW POSTS ENTER "+OPTION_VIEW_POSTS);
+        System.out.println("TO CREATE A POST ENTER "+OPTION_CREATE_POST);
+        System.out.println("TO SEARCH FOR POSTS ENTER "+OPTION_SEARCH_POST);
+        System.out.println("TO SEARCH FOR A PROFILE ENTER "+OPTION_SEARCH_PROFILE);
+        System.out.println("TO VIEW PERSONAL PROFILE ENTER "+OPTION_VIEW_PERSONAL_PROFILE);
+
+        int operationInput = Integer.parseInt(sc.nextLine());
+
+        switch(operationInput){
+            case OPTION_VIEW_POSTS:
+                pdao.CreateProfile(new Profile(email,password));
+
+            case OPTION_CREATE_POST:
+                pdao.logIn(email,password);
+
+            case OPTION_SEARCH_POST:
+                pdao.logIn(email,password);
+
+            case OPTION_SEARCH_PROFILE:
+                pdao.logIn(email,password);
+
+            case OPTION_VIEW_PERSONAL_PROFILE:
+                pdao.logIn(email,password);
+        }
+
 
     }
 
