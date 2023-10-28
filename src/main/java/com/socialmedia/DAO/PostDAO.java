@@ -1,5 +1,6 @@
 package com.socialmedia.DAO;
 
+import com.socialmedia.entities.Post;
 import com.socialmedia.home.Util;
 import jakarta.persistence.EntityManager;
 
@@ -22,8 +23,12 @@ public class PostDAO {
         return posts;
     }
 
-    public void createPosts(String postText, String email){
-
+    public void createPosts(String email, String postText){
+        EntityManager em =  util.getEM();
+        var tx = em.getTransaction();
+        em.persist(new Post(email,postText));
+        tx.commit();
+        em.close();
     }
 
 }

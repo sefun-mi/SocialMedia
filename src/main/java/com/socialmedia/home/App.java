@@ -1,6 +1,8 @@
 package com.socialmedia.home;
 
+import com.socialmedia.DAO.PostDAO;
 import com.socialmedia.DAO.ProfileDAO;
+import com.socialmedia.entities.Post;
 import com.socialmedia.entities.Profile;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -45,6 +47,8 @@ public class App {
                 pdao.logIn(email,password);
         }
 
+        Profile profile = new Profile();
+
         System.out.println("WHAT OPERATION WOULD YOU LIKE TO DO NOW");
         System.out.println("TO VIEW POSTS ENTER "+OPTION_VIEW_POSTS);
         System.out.println("TO CREATE A POST ENTER "+OPTION_CREATE_POST);
@@ -54,45 +58,49 @@ public class App {
 
         int operationInput = Integer.parseInt(sc.nextLine());
 
-        switch(operationInput){
-            case OPTION_VIEW_POSTS:
-                pdao.CreateProfile(new Profile(email,password));
 
-            case OPTION_CREATE_POST:
-                pdao.logIn(email,password);
+        if(operationInput==OPTION_VIEW_POSTS){
+            var dao = getPostDAO();
+            try{
+                List<Post> posts = dao.getPosts(profile.getEmail());
+                int count = 0;
+                for (Post post : posts){
+                    System.out.println("Post number :"+ count++);
+                    System.out.println("Post ID :"+ post.getPostId());
+                    System.out.println(post.getContent());
+                    System.out.println("--------------------");
+                }
+            }catch (Exception e){
+                System.out.println("an error occured");
+                e.printStackTrace();
+            }
 
-            case OPTION_SEARCH_POST:
-                pdao.logIn(email,password);
+        } else if (operationInput==OPTION_CREATE_POST ) {
+            var dao = getPostDAO();
+            System.out.println("Enter post text and hit enter");
+            String postText = sc.nextLine();
+            dao.createPosts(email,postText);
 
-            case OPTION_SEARCH_PROFILE:
-                pdao.logIn(email,password);
+        } else if (operationInput==OPTION_SEARCH_POST ) {
 
-            case OPTION_VIEW_PERSONAL_PROFILE:
-                pdao.logIn(email,password);
+        } else if (operationInput==OPTION_SEARCH_PROFILE ) {
+
+        } else if (operationInput==OPTION_VIEW_PERSONAL_PROFILE){
+
         }
 
 
-    }
-
-    public void query(Object obj){
 
     }
 
-    static void feedMenu(){
-
+    public static PostDAO getPostDAO(){
+        return new PostDAO();
     }
 
-    static void searchMenu(){
-
+    public static ProfileDAO getProfileDAO(){
+        return new ProfileDAO();
     }
 
-    static void profileMenu(){
-
-    }
-
-    static void createMenu(){
-
-    }
 
     static void logOut(){
 
