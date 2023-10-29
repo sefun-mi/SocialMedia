@@ -23,6 +23,13 @@ public class PostDAO {
         return posts;
     }
 
+    public Post getPost(String postId){
+        EntityManager em =  util.getEM();
+        var tx = em.getTransaction();
+        Post post = (Post) em.createQuery("SELECT p from POSTS p WHERE p.postId = '" +postId+"'").getSingleResult();
+        return post;
+    }
+
     public void createPosts(String email, String postText){
         EntityManager em =  util.getEM();
         var tx = em.getTransaction();

@@ -77,11 +77,19 @@ public class App {
 
         } else if (operationInput==OPTION_CREATE_POST ) {
             var dao = getPostDAO();
-            System.out.println("Enter post text and hit enter");
-            String postText = sc.nextLine();
-            dao.createPosts(email,postText);
+            System.out.println("Type post text and hit enter");
+            String postId = sc.nextLine();
+            var post = dao.getPost(postId);
+            System.out.println("Post ID :"+ post.getPostId());
+            System.out.println(post.getContent());
+            System.out.println("--------------------");
 
         } else if (operationInput==OPTION_SEARCH_POST ) {
+            var dao = getPostDAO();
+            System.out.println("Type postId and hit enter");
+            String postId = sc.nextLine();
+            dao.getPost(postId);
+
 
         } else if (operationInput==OPTION_SEARCH_PROFILE ) {
 
