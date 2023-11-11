@@ -1,9 +1,14 @@
 package com.socialmedia.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 //import java.util.ArrayList;
 
+@Entity(name = "POST")
 public class Post {
     private String email;
+    @Id
     private String postId;
     private String content;
 //    private ArrayList <Comment> comments;

@@ -17,7 +17,7 @@ public class ProfileDAO {
         EntityManager em = util.getEM();
         var tx = em.getTransaction();
         tx.begin();
-        List profiles = em.createQuery("SELECT * from m WHERE m.email = "+email+" AND m.password = "+password).getResultList();
+        List profiles = em.createQuery("SELECT p from PROFILE p WHERE p.email = '" +email+ "'AND p.password = '"+password+"'").getResultList();
         em.close();
 
         if(profiles.size()<1){
@@ -28,8 +28,6 @@ public class ProfileDAO {
 
     public void CreateProfile(Profile profile){
 
-        System.out.println(profile.getEmail());
-        System.out.println(profile.getPassword());
         if(checkProfile(profile.getEmail())){
             throw new IllegalArgumentException("profile already exists");
         }

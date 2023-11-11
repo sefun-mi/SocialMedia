@@ -41,9 +41,11 @@ public class App {
 
         switch(input){
             case OPTION_SIGNUP:
+                System.out.println(OPTION_SIGNUP);
                 pdao.CreateProfile(new Profile(email,password));
 
             case OPTION_LOGIN:
+                System.out.println(OPTION_LOGIN);
                 pdao.logIn(email,password);
         }
 
@@ -95,8 +97,20 @@ public class App {
             System.out.println("Type username and hit enter");
             String userName = sc.nextLine();
 
-        } else if (operationInput==OPTION_VIEW_PERSONAL_PROFILE){
 
+        } else if (operationInput==OPTION_VIEW_PERSONAL_PROFILE){
+            var dao = getPostDAO();
+            List <Post> posts = dao.getPosts(profile.getEmail());
+            System.out.println("Username is: "+ profile.getUserName());
+            System.out.println("User email is: "+ profile.getEmail());
+            System.out.println("User's posts are: ");
+            System.out.println("<-------------------->");
+            for (Post post: posts){
+                System.out.println("Post ID :"+ post.getPostId());
+                System.out.println(post.getContent());
+                System.out.println("--------------------");
+            }
+            System.out.println("<-------------------->");
         }
 
 
