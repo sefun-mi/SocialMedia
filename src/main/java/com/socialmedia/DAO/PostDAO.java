@@ -32,6 +32,7 @@ public class PostDAO {
     public void createPosts(String email, String postText){
         EntityManager em =  util.getEM();
         var tx = em.getTransaction();
+        tx.begin();
         em.persist(new Post(email,postText));
         tx.commit();
         em.close();
