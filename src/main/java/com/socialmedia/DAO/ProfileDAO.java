@@ -8,7 +8,7 @@ import jakarta.persistence.EntityManager;
 public class ProfileDAO {
     Util util = new Util();
 
-    public void logIn(String email, String password){
+    public Profile logIn(String email, String password){
 
         if(!checkProfile(email)){
             throw new IllegalArgumentException("profile does not exist");
@@ -17,12 +17,14 @@ public class ProfileDAO {
         EntityManager em = util.getEM();
         var tx = em.getTransaction();
         tx.begin();
-        List profiles = em.createQuery("SELECT p from PROFILE p WHERE p.email = '" +email+ "'AND p.password = '"+password+"'").getResultList();
+        List <Profile> profiles = em.createQuery("SELECT p from PROFILE p WHERE p.email = '" +email+ "'AND p.password = '"+password+"'").getResultList();
         em.close();
 
-        if(profiles.size()<1){
+        if(profiles.isEmpty()){
             throw new IllegalArgumentException("incorrect email or password");
         }
+
+        return profiles.get(0);
 
     }
 
