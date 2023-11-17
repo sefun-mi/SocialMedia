@@ -12,7 +12,6 @@ public class PostDAO {
 
     public List getPosts(String email) { //edit, also, decide structure of posts
         EntityManager em =  util.getEM();
-        var tx = em.getTransaction();
         List posts = em.createQuery("SELECT p from POST p WHERE p.email = '" +email+"'").getResultList();
 
         if (posts.isEmpty()){
@@ -24,7 +23,6 @@ public class PostDAO {
 
     public Post getPost(String postId){
         EntityManager em =  util.getEM();
-        var tx = em.getTransaction();
         Post post = (Post) em.createQuery("SELECT p from POST p WHERE p.postId = '" +postId+"'").getSingleResult();
         return post;
     }

@@ -79,7 +79,7 @@ public class App {
                 var dao = getProfileDAO();
                 System.out.println("Type username and hit enter");
                 String userName = sc.nextLine();
-
+                //TODO
 
             } else if (operationInput==OPTION_VIEW_PERSONAL_PROFILE){
                 var dao = getPostDAO();
