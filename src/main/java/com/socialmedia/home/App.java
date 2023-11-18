@@ -88,11 +88,11 @@ public class App {
                 System.out.println("User email is: "+ profile.getEmail());
                 System.out.println("User's posts are: ");
                 System.out.println("<-------------------->");
-                for (Post post: posts){
-                    System.out.println("Post ID :"+ post.getPostId());
-                    System.out.println(post.getContent());
-                    System.out.println("--------------------");
-                }
+//                for (Post post: posts){
+//                    System.out.println("Post ID :"+ post.getPostId());
+//                    System.out.println(post.getContent());
+//                    System.out.println("--------------------");
+//                }
                 System.out.println("<-------------------->");
             }
             else if(operationInput==OPTION_EXIT){
