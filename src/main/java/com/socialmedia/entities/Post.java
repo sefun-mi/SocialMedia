@@ -3,6 +3,9 @@ package com.socialmedia.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.util.Random;
+
+
 //import java.util.ArrayList;
 
 @Entity(name = "POST")
@@ -18,9 +21,12 @@ public class Post {
     }
 
     public Post(String email, String content) {
+        Random rand = new Random();
         this.email = email;
-        this.postId = "001";
+        this.postId = String.valueOf(rand.nextInt(100,999));
+        System.out.println("postid is: "+postId);
         this.content = content;
+
     }
 
     public String getEmail() {
