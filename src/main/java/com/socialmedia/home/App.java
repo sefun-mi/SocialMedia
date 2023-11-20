@@ -83,7 +83,7 @@ public class App {
 
             } else if (operationInput==OPTION_VIEW_PERSONAL_PROFILE){
                 var dao = getPostDAO();
-                List <Post> posts = dao.getPosts(profile.getEmail());
+                List <Post> posts = dao.smth(profile.getEmail());
                 System.out.println("Username is: "+ profile.getUserName());
                 System.out.println("User email is: "+ profile.getEmail());
                 System.out.println("User's posts are: ");

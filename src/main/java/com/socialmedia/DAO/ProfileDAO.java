@@ -18,6 +18,7 @@ public class ProfileDAO {
         var tx = em.getTransaction();
         tx.begin();
         List <Profile> profiles = em.createQuery("SELECT p from PROFILE p WHERE p.email = '" +email+ "'AND p.password = '"+password+"'").getResultList();
+        tx.commit();
         em.close();
 
         if(profiles.isEmpty()){
