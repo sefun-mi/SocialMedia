@@ -30,8 +30,8 @@ public class App {
     }
     public static void main(String [] args){
 
-        Profile profile = startMenu();
-        System.out.println("______________well that worked");
+        EntityManager em = new Util().getEM();
+        Profile profile = startMenu(em);
 
         while(isLoggedIn){
             System.out.println("WHAT OPERATION WOULD YOU LIKE TO DO NOW");
@@ -76,7 +76,7 @@ public class App {
                 System.out.println("--------------------");
 
             } else if (operationInput==OPTION_SEARCH_PROFILE ) {
-                var dao = getProfileDAO();
+                var dao = new ProfileDAO(em);
                 System.out.println("Type username and hit enter");
                 String userName = sc.nextLine();
                 //TODO
@@ -102,10 +102,9 @@ public class App {
 
     }
 
-    public static Profile startMenu(){
+    public static Profile startMenu(EntityManager em){
         int input = 0;
-        ProfileDAO pdao = new ProfileDAO();
-
+        ProfileDAO pdao = new ProfileDAO(em);
         while(true){
             System.out.println("------------------------------");
             System.out.println("WELCOME TO THE APP!");
@@ -143,10 +142,6 @@ public class App {
 
     public static PostDAO getPostDAO(){
         return new PostDAO();
-    }
-
-    public static ProfileDAO getProfileDAO(){
-        return new ProfileDAO();
     }
 
 
