@@ -41,7 +41,7 @@ public class ProfileDAO {
         tx.commit();
     }
 
-    public void deleteProfile(EntityManager em, String email, String password){
+    public void deleteProfile(String email, String password){
 
         logIn(email,password);
         var tx = em.getTransaction();
@@ -56,9 +56,9 @@ public class ProfileDAO {
         tx.begin();
         List profiles = em.createQuery("SELECT p from PROFILE p WHERE p.email = '"+ email+"'", Profile.class).getResultList();
         tx.commit();
-        if(profiles.size()>0){
-            return true;
+        if(profiles.isEmpty()){
+            return false;
         }
-        return false;
+        return true;
     }
 }

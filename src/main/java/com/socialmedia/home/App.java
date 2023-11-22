@@ -13,8 +13,8 @@ import java.util.Scanner;
 
 public class App {
 
-    public static final int OPTION_SIGNUP = 1;
-    public static final int OPTION_LOGIN = 2;
+    private static final int OPTION_SIGNUP = 1;
+    private static final int OPTION_LOGIN = 2;
     public static final int OPTION_VIEW_POSTS = 3;
     public static final int OPTION_CREATE_POST = 4;
     public static final int OPTION_SEARCH_POST = 5;
@@ -24,13 +24,16 @@ public class App {
     private static boolean isLoggedIn;
     private static boolean isExiting;
     private static final Scanner sc;
+    private static final EntityManager em;
+    private static PostDAO postDAO;
+    private static ProfileDAO profileDAO;
 
     static {
         sc = new Scanner(System.in);
+        em = new Util().getEM();
     }
     public static void main(String [] args){
 
-        EntityManager em = new Util().getEM();
         Profile profile = startMenu(em);
 
         while(isLoggedIn){
@@ -83,7 +86,7 @@ public class App {
 
             } else if (operationInput==OPTION_VIEW_PERSONAL_PROFILE){
                 var dao = getPostDAO();
-                List <Post> posts = dao.smth(profile.getEmail());
+                List <Post> posts = dao.getPosts(profile.getEmail());
                 System.out.println("Username is: "+ profile.getUserName());
                 System.out.println("User email is: "+ profile.getEmail());
                 System.out.println("User's posts are: ");
@@ -141,7 +144,19 @@ public class App {
     }
 
     public static PostDAO getPostDAO(){
-        return new PostDAO();
+        if(postDAO == null){
+            return new PostDAO(em);
+        }
+
+        return postDAO;
+    }
+
+    public static ProfileDAO getProfileDAO(){
+        if(profileDAO == null){
+            return new ProfileDAO(em);
+        }
+
+        return profileDAO;
     }
 
 
