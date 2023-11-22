@@ -67,22 +67,33 @@ public class App {
                 var dao = getPostDAO();
                 System.out.println("Type post text and hit enter");
                 String postText = sc.nextLine();
-                dao.createPosts(profile.getEmail(), postText);
+                String postId = dao.createPosts(profile.getEmail(), postText);
+                System.out.println("Creation successful, post ID is: "+postId);
 
             } else if (operationInput==OPTION_SEARCH_POST ) {
                 var dao = getPostDAO();
                 System.out.println("Type postId and hit enter");
-                String postId = sc.nextLine();
+                String postId = sc.nextLine().trim();
                 Post post = dao.getPost(postId);
                 System.out.println("Post ID :"+ post.getPostId());
                 System.out.println(post.getContent());
                 System.out.println("--------------------");
 
             } else if (operationInput==OPTION_SEARCH_PROFILE ) {
-                var dao = new ProfileDAO(em);
+                var dao = getProfileDAO();
                 System.out.println("Type username and hit enter");
                 String userName = sc.nextLine();
-                //TODO
+                Profile searchedProfile = dao.searchProfile(userName);
+                System.out.println("Username is: "+ searchedProfile.getUserName());
+                System.out.println("User email is: "+ searchedProfile.getEmail());
+                System.out.println("User's posts are: ");
+                System.out.println("<-------------------->");
+                for (Post post: getPostDAO().getPosts(userName)){
+                    System.out.println("Post ID :"+ post.getPostId());
+                    System.out.println(post.getContent());
+                    System.out.println("--------------------");
+                }
+                System.out.println("<-------------------->");
 
             } else if (operationInput==OPTION_VIEW_PERSONAL_PROFILE){
                 var dao = getPostDAO();
@@ -91,11 +102,11 @@ public class App {
                 System.out.println("User email is: "+ profile.getEmail());
                 System.out.println("User's posts are: ");
                 System.out.println("<-------------------->");
-//                for (Post post: posts){
-//                    System.out.println("Post ID :"+ post.getPostId());
-//                    System.out.println(post.getContent());
-//                    System.out.println("--------------------");
-//                }
+                for (Post post: posts){
+                    System.out.println("Post ID :"+ post.getPostId());
+                    System.out.println(post.getContent());
+                    System.out.println("--------------------");
+                }
                 System.out.println("<-------------------->");
             }
             else if(operationInput==OPTION_EXIT){
@@ -137,10 +148,6 @@ public class App {
             }
 
         }
-    }
-
-    public static void loggedInMenu(){
-
     }
 
     public static PostDAO getPostDAO(){

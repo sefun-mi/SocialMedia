@@ -61,4 +61,12 @@ public class ProfileDAO {
         }
         return true;
     }
+
+    public Profile searchProfile(String userName){
+        var tx = em.getTransaction();
+        tx.begin();
+        Profile profile = em.createQuery("SELECT p from PROFILE p WHERE p.userName = '"+ userName+"'", Profile.class).getSingleResult();
+        tx.commit();
+        return profile;
+    }
 }

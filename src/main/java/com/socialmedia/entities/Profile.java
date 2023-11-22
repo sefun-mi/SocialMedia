@@ -1,14 +1,13 @@
 package com.socialmedia.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 //import java.util.ArrayList;
 @Entity(name = "PROFILE")
 public class Profile {
 
     private String userId;
+    @Column(unique = true)
     private String userName;
     private String password;
     @Id

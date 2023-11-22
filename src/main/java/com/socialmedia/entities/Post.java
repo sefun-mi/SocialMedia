@@ -10,7 +10,7 @@ import java.util.Random;
 
 @Entity(name = "POST")
 public class Post {
-    private String email;
+    private String userName;
     @Id
     private String postId;
     private String content;
@@ -22,19 +22,18 @@ public class Post {
 
     public Post(String email, String content) {
         Random rand = new Random();
-        this.email = email;
+        this.userName = email;
         this.postId = String.valueOf(rand.nextInt(100,999));
-        System.out.println("postid is: "+postId);
         this.content = content;
 
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPostId() {
