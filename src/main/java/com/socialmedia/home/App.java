@@ -8,11 +8,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.util.IllegalFormatFlagsException;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
 
+    public static final int OPTION_EXIT = 0;
     private static final int OPTION_SIGNUP = 1;
     private static final int OPTION_LOGIN = 2;
     public static final int OPTION_VIEW_POSTS = 3;
@@ -20,9 +22,9 @@ public class App {
     public static final int OPTION_SEARCH_POST = 5;
     public static final int OPTION_SEARCH_PROFILE = 6;
     public static final int OPTION_VIEW_PERSONAL_PROFILE = 7;
-    public static final int OPTION_EXIT = 9;
+    public static final int OPTION_LOGOUT = 9;
     private static boolean isLoggedIn;
-    private static boolean isExiting;
+    private static boolean isRunning;
     private static final Scanner sc;
     private static final EntityManager em;
     private static PostDAO postDAO;
@@ -34,8 +36,63 @@ public class App {
     }
     public static void main(String [] args){
 
-        Profile profile = startMenu(em);
+        isRunning = true;
+        while(isRunning){
+            Profile profile = startMenu();
+            mainMenu(profile);
+        }
 
+
+    }
+
+    public static Profile startMenu(){
+        int input = 0;
+        ProfileDAO pdao = new ProfileDAO(em);
+        while(isRunning){
+            System.out.println("------------------------------");
+            System.out.println("WELCOME TO THE APP!");
+            System.out.println("SELECT ONE OF THE OPTIONS BELOW TO PROCEED");
+            System.out.println("TO SIGNUP PLEASE SELECT: "+OPTION_SIGNUP);
+            System.out.println("TO LOGIN PLEASE SELECT: "+OPTION_LOGIN);
+            System.out.println("TO EXIT PLEASE SELECT: "+OPTION_EXIT);
+            input = Integer.parseInt(sc.nextLine());
+
+            String userName, email, password;
+            switch(input){
+                case OPTION_SIGNUP:
+                    System.out.println("Enter account email");
+                    email = sc.nextLine();
+                    System.out.println("<----------->");
+                    System.out.println("Enter username");
+                    userName = sc.nextLine();
+                    System.out.println("<----------->");
+                    System.out.println("Enter account password");
+                    password = sc.nextLine();
+                    System.out.println("<----------->");
+                    pdao.CreateProfile(new Profile(userName,email,password));
+                    break;
+
+                case OPTION_LOGIN:
+                    System.out.println("Enter account email");
+                    email = sc.nextLine();
+                    System.out.println("<----------->");
+                    System.out.println("Enter account password");
+                    password = sc.nextLine();
+                    System.out.println("<----------->");
+                    var profile = pdao.logIn(email,password);
+                    isLoggedIn = true;
+                    return profile;
+
+                case OPTION_EXIT:
+                    exit();
+            }
+
+        }
+        return null;
+    }
+
+
+    public static void mainMenu(Profile profile){
         while(isLoggedIn){
             System.out.println("WHAT OPERATION WOULD YOU LIKE TO DO NOW");
             System.out.println("TO VIEW POSTS ENTER "+OPTION_VIEW_POSTS);
@@ -43,7 +100,7 @@ public class App {
             System.out.println("TO SEARCH FOR POSTS ENTER "+OPTION_SEARCH_POST);
             System.out.println("TO SEARCH FOR A PROFILE ENTER "+OPTION_SEARCH_PROFILE);
             System.out.println("TO VIEW PERSONAL PROFILE ENTER "+OPTION_VIEW_PERSONAL_PROFILE);
-            System.out.println("TO EXIT THE APPLICATION ENTER "+OPTION_EXIT);
+            System.out.println("TO LOG OUT OF THE APPLICATION ENTER "+OPTION_LOGOUT);
 
             int operationInput = Integer.parseInt(sc.nextLine());
 
@@ -109,44 +166,9 @@ public class App {
                 }
                 System.out.println("<-------------------->");
             }
-            else if(operationInput==OPTION_EXIT){
+            else if(operationInput==OPTION_LOGOUT){
                 isLoggedIn = false;
             }
-        }
-
-    }
-
-    public static Profile startMenu(EntityManager em){
-        int input = 0;
-        ProfileDAO pdao = new ProfileDAO(em);
-        while(true){
-            System.out.println("------------------------------");
-            System.out.println("WELCOME TO THE APP!");
-            System.out.println("SELECT ONE OF THE OPTIONS BELOW TO PROCEED");
-            System.out.println("TO SIGNUP PLEASE SELECT: "+OPTION_SIGNUP);
-            System.out.println("TO LOGIN PLEASE SELECT: "+OPTION_LOGIN);
-            input = Integer.parseInt(sc.nextLine());
-
-            System.out.println("Enter account email");
-            String email = sc.nextLine();
-            System.out.println("<----------->");
-            System.out.println("Enter account password");
-            String password = sc.nextLine();
-            System.out.println("<----------->");
-
-            switch(input){
-                case OPTION_SIGNUP:
-                    System.out.println(OPTION_SIGNUP);
-                    pdao.CreateProfile(new Profile(email,password));
-                    continue;
-
-                case OPTION_LOGIN:
-                    System.out.println(OPTION_LOGIN);
-                    var profile = pdao.logIn(email,password);
-                    isLoggedIn = true;
-                    return profile;
-            }
-
         }
     }
 
@@ -166,8 +188,11 @@ public class App {
         return profileDAO;
     }
 
-
-    static void logOut(){
-
+    static void exit(){
+        if(isLoggedIn){
+            System.out.println("please log out first");
+        }
+        em.close();
+        isRunning = false;
     }
 }

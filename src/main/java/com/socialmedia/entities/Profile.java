@@ -18,7 +18,8 @@ public class Profile {
         this.userId = "0001";
     }
 
-    public Profile(String email, String password){
+    public Profile(String userName,String email, String password){
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.userId = "0002";
