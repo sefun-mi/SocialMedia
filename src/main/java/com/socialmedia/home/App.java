@@ -19,9 +19,10 @@ public class App {
     private static final int OPTION_LOGIN = 2;
     public static final int OPTION_VIEW_POSTS = 3;
     public static final int OPTION_CREATE_POST = 4;
-    public static final int OPTION_SEARCH_POST = 5;
-    public static final int OPTION_SEARCH_PROFILE = 6;
-    public static final int OPTION_VIEW_PERSONAL_PROFILE = 7;
+    public static final int OPTION_DELETE_POST = 5;
+    public static final int OPTION_SEARCH_POST = 6;
+    public static final int OPTION_SEARCH_PROFILE = 7;
+    public static final int OPTION_VIEW_PERSONAL_PROFILE = 8;
     public static final int OPTION_LOGOUT = 9;
     private static boolean isLoggedIn;
     private static boolean isRunning;
@@ -126,6 +127,13 @@ public class App {
                 String postText = sc.nextLine();
                 String postId = dao.createPosts(profile.getEmail(), postText);
                 System.out.println("Creation successful, post ID is: "+postId);
+
+            } else if (operationInput==OPTION_DELETE_POST ) {
+                var dao = getPostDAO();
+                System.out.println("Type post id and hit enter");
+                String postId = sc.nextLine();
+                dao.deletePost(postId, profile.getEmail());
+                System.out.println("post with post ID is: "+postId+" deleted successfully");
 
             } else if (operationInput==OPTION_SEARCH_POST ) {
                 var dao = getPostDAO();

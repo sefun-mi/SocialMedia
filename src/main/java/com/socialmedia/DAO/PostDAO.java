@@ -39,6 +39,13 @@ public class PostDAO {
         return post;
     }
 
+    public void deletePost(String postId, String email){
+        var tx = em.getTransaction();
+        tx.begin();
+        em.createQuery("DELETE p from POST p WHERE p.postId = '"+postId+"' AND p.email = '"+email+"'").executeUpdate();
+        tx.commit();
+    }
+
     public String createPosts(String email, String postText){
 
         Post post = new Post(email,postText);
