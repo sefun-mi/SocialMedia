@@ -23,7 +23,8 @@ public class App {
     public static final int OPTION_SEARCH_POST = 6;
     public static final int OPTION_SEARCH_PROFILE = 7;
     public static final int OPTION_VIEW_PERSONAL_PROFILE = 8;
-    public static final int OPTION_LOGOUT = 9;
+    public static final int OPTION_DELETE_PERSONAL_PROFILE = 9;
+    public static final int OPTION_LOGOUT = 10;
     private static boolean isLoggedIn;
     private static boolean isRunning;
     private static final Scanner sc;
@@ -42,8 +43,6 @@ public class App {
             Profile profile = startMenu();
             mainMenu(profile);
         }
-
-
     }
 
     public static Profile startMenu(){
@@ -173,6 +172,16 @@ public class App {
                     System.out.println("--------------------");
                 }
                 System.out.println("<-------------------->");
+            }
+            else if (operationInput==OPTION_DELETE_PERSONAL_PROFILE){
+                var dao = getProfileDAO();
+                System.out.println("Enter account email");
+                String email = sc.nextLine();
+                System.out.println("<----------->");
+                System.out.println("Enter account password");
+                String password = sc.nextLine();
+                System.out.println("<----------->");
+                dao.deleteProfile(email,password);
             }
             else if(operationInput==OPTION_LOGOUT){
                 isLoggedIn = false;
